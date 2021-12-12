@@ -16,7 +16,13 @@ while ($item = mysqli_fetch_assoc($query))
     if ($item['password'] == $password) {
         $data = array(
             "status_code" => "200",
-            "message" => $item['name'],
+            "id" => $item['id'],
+            "name" => $item['name'],
+            "user_class" => $item['class'],
+            "u_id" => $item['u_id'],
+            "email" => $item['email'],
+            "password" => $item['password'],
+            "image" => "123"
         );
     } else {
         $data = array(

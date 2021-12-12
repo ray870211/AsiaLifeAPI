@@ -21,7 +21,7 @@ $query = mysqli_query($connection, $post_sql);
 if ($query != false) {
     echo json_encode($return_data);
 } else {
-    $return_data["status_code"] = 404;
+    $return_data["status_code"] = "404";
     echo json_encode($return_data);
 }
 // $comment_sql = "INSERT INTO comment VALUES(null,$user,$content)";

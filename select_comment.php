@@ -16,8 +16,7 @@ $sql = "SELECT
 `comment`.create_time,
 `comment`.post_id,
 `comment`.content,
-`comment`.score,
-post.id
+`comment`.score
 FROM
 `comment`
 INNER JOIN post ON `comment`.post_id = $id AND `comment`.post_id = post.id
@@ -25,7 +24,9 @@ INNER JOIN post ON `comment`.post_id = $id AND `comment`.post_id = post.id
 ";
 $query = mysqli_query($connection, $sql);
 while ($items = mysqli_fetch_assoc($query)) {
+    // var_dump($items);
     $data = array(
+        "id" => $items['id'],
         "author" => $items['author'],
         "content" => $items['content'],
         "create_time" => $items['create_time'],

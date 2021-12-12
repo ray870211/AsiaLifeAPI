@@ -4,10 +4,11 @@ $return_data = array(
     "post_data" =>  [],
 );
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $class = $_POST['class'];
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
-$select_sql = "SELECT * FROM post";
+$select_sql = "SELECT * FROM post where class = $class";
 $query = mysqli_query($connection, $select_sql);
 while ($item = mysqli_fetch_assoc($query)) {
     $items[] = $item;
@@ -15,6 +16,7 @@ while ($item = mysqli_fetch_assoc($query)) {
 for ($i = 0; $i < count($items); $i++) {
     $data = array(
         "post_id" => $items[$i]['id'],
+        "post_author" => $items[$i]['author'],
         "post_class" => $items[$i]['class'],
         "post_title" => $items[$i]['title'],
         "post_content" => $items[$i]['content'],
