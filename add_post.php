@@ -5,6 +5,7 @@ $return_data = array(
     "status_code" =>  "200",
 );
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_id = $_POST["id"];
     $title = $_POST["title"];
     $class = $_POST['class'];
     $user = $_POST['user'];
@@ -18,10 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 $class = intval($class);
 
-$post_sql = "INSERT INTO post VALUES(null,'$title','$user','$content',$class,'$time')";
+$post_sql = "INSERT INTO post VALUES(null,'$title','$user','$content',$class,'$time',$user_id)";
 $query = mysqli_query($connection, $post_sql);
 $insert_id = mysqli_insert_id($connection);
-$add_comment_sql = "INSERT INTO comment VALUES(null,'$user','$content','$time',$insert_id,0)";
+$add_comment_sql = "INSERT INTO comment VALUES(null,'$user','$content','$time',$insert_id,0,$user_id)";
 $query = mysqli_query($connection, $add_comment_sql);
 if ($query != false) {
     echo json_encode($return_data);
