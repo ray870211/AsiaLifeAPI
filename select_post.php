@@ -8,7 +8,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
-$select_sql = "SELECT * FROM post where class = $class";
+$select_sql = "SELECT
+post.id,
+post.title,
+post.author,
+post.content,
+post.class,
+post.create_time,
+post.user_id,
+`user`.image
+FROM
+post
+INNER JOIN `user` ON post.user_id = `user`.id
+WHERE
+post.class = $class
+";
 $query = mysqli_query($connection, $select_sql);
 while ($item = mysqli_fetch_assoc($query)) {
     $items[] = $item;
@@ -20,7 +34,8 @@ for ($i = 0; $i < count($items); $i++) {
         "post_class" => $items[$i]['class'],
         "post_title" => $items[$i]['title'],
         "post_content" => $items[$i]['content'],
-        "post_create_time" => $items[$i]['create_time']
+        "post_create_time" => $items[$i]['create_time'],
+        "post_author_image" => $items[$i]['image']
     );
     array_push($return_data["post_data"], $data);
 }

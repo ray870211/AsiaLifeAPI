@@ -22,7 +22,7 @@ while ($item = mysqli_fetch_assoc($query))
             "u_id" => $item['u_id'],
             "email" => $item['email'],
             "password" => $item['password'],
-            "image" => "123"
+            "image" => $item['image']
         );
     } else {
         $data = array(
